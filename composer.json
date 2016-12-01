@@ -1,0 +1,47 @@
+{
+    "require": {
+        "pear/pear_exception": "*",
+		"php": ">= 5.4"
+    },
+   
+    "autoload": {
+        "psr-0": {
+            "Auth": "./"
+        }
+    },
+ 
+    "description": "Abstraction of various SASL mechanism responses ; compatibility with newer PHP releases (adapted from pear/auth_sasl)",
+ 
+    "include-path": [
+        "./"
+    ],
+ 
+    "license": "MIT",
+ 
+    "name": "net-tools/auth_sasl",
+ 
+    "type": "library",
+ 
+    "authors": [
+         {
+            "name": "Pierre",
+            "email": "dev@net-tools.ovh",
+            "role": "Developer"
+        },
+        {
+            "email": "amistry@am-productions.biz",
+            "name": "Anish Mistry",
+            "role": "Lead"
+        },
+        {
+            "email": "richard@php.net",
+            "name": "Richard Heyes",
+            "role": "Lead"
+        },
+        {
+            "email": "michael@bretterklieber.com",
+            "name": "Michael Bretterklieber",
+            "role": "Lead"
+        }
+    ]
+}
