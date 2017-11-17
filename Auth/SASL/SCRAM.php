@@ -80,8 +80,8 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
             'sha512' => 'sha512');
         if (function_exists('hash_hmac') && isset($hashes[$hash]))
         {
-            $this->hash = function($data){return hash($hashes[$hash], $data, TRUE);};
-            $this->hmac = function($key, $str, $raw) {return hash_hmac($hashes[$hash], $str, $key, $raw);};
+            $this->hash = function($data) use($hashes, $hash) {return hash($hashes[$hash], $data, TRUE);};
+            $this->hmac = function($key, $str, $raw) use($hashes, $hash) {return hash_hmac($hashes[$hash], $str, $key, $raw);};
 		}
         elseif ($hash == 'md5')
         {
