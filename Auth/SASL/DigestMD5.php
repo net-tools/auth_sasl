@@ -81,7 +81,7 @@ class Auth_SASL_DigestMD5 extends Auth_SASL_Common
                 return sprintf('username="%s"' . $authzid_string  . ',nonce="%s",cnonce="%s",nc=00000001,qop=auth,digest-uri="%s",response=%s,maxbuf=%d', $authcid, $challenge['nonce'], $cnonce, $digest_uri, $response_value, $challenge['maxbuf']);
             }
         } else {
-            throw new InvalidateArgumentException('Invalid digest challenge');
+            throw new InvalidArgumentException('Invalid digest challenge');
         }
     }
     
@@ -96,6 +96,7 @@ class Auth_SASL_DigestMD5 extends Auth_SASL_Common
     function _parseChallenge($challenge)
     {
         $tokens = array();
+        $matches = [];
         while (preg_match('/^([a-z-]+)=("[^"]+(?<!\\\)"|[^,]+)/i', $challenge, $matches)) {
 
             // Ignore these as per rfc2831

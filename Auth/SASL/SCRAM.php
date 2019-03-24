@@ -164,7 +164,6 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
     */
     private function _generateInitialResponse($authcid, $authzid)
     {
-        $init_rep = '';
         $gs2_cbind_flag = 'n,'; // TODO: support channel binding.
         $this->gs2_header = $gs2_cbind_flag . (!empty($authzid)? 'a=' . $authzid : '') . ',';
 
@@ -188,6 +187,7 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
     {
         // XXX: as I don't support mandatory extension, I would fail on them.
         // And I simply ignore any optional extension.
+        $matches = [];
         $server_message_regexp = "#^r=([\x21-\x2B\x2D-\x7E]+),s=((?:[A-Za-z0-9/+]{4})*(?:[A-Za-z0-9]{3}=|[A-Xa-z0-9]{2}==)?),i=([0-9]*)(,[A-Za-z]=[^,])*$#";
         if (!isset($this->cnonce, $this->gs2_header)
             || !preg_match($server_message_regexp, $challenge, $matches))
@@ -240,6 +240,7 @@ class Auth_SASL_SCRAM extends Auth_SASL_Common
     public function processOutcome($data)
     {
         $verifier_regexp = '#^v=((?:[A-Za-z0-9/+]{4})*(?:[A-Za-z0-9]{3}=|[A-Xa-z0-9]{2}==)?)$#';
+        $matches = [];
         if (!isset($this->saltedPassword, $this->authMessage)
             || !preg_match($verifier_regexp, $data, $matches))
         {

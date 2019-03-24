@@ -98,6 +98,7 @@ class Auth_SASL
 
             default:
                 $scram = '/^SCRAM-(.{1,9})$/i';
+                $matches = [];
                 if (preg_match($scram, $type, $matches))
                 {
                     $hash = $matches[1];
